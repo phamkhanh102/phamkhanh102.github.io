@@ -1,0 +1,63 @@
+﻿.navbar {
+    background: #020617;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    gap: 40px;
+    padding: 14px 20px;
+}
+
+    .nav-container a {
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+/* ITEM */
+.nav-item {
+    position: relative;
+}
+
+/* MEGA MENU */
+.mega {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 12px;
+    width: 500px;
+    display: none;
+    gap: 40px;
+}
+
+@media (max-width: 900px) {
+    .nav-container { display: none; }
+}
+
+/* SHOW */
+.nav-item:hover .mega {
+    display: flex;
+}
+
+/* COLUMN */
+.mega-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .mega-col h4 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .mega-col a {
+        color: #333;
+        font-size: 14px;
+    }
