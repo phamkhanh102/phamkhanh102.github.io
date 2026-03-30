@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/footer.css">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Barlow', sans-serif; background: #f5f5f5; color: #111; padding-top: 110px; min-height: 100vh; }
+        body { font-family: 'Barlow', sans-serif; background: #f5f5f5; color: #111; padding-top: 130px; min-height: 100vh; }
         a { text-decoration: none; color: inherit; }
 
         /* PAGE HERO */
@@ -677,11 +677,27 @@
     let payMethod  = 'cod';
     let cart       = JSON.parse(localStorage.getItem('cart') || '[]');
 
-    // Pre-fill if logged in
-    const savedName  = localStorage.getItem('name')  || '';
-    const savedEmail = localStorage.getItem('email') || '';
-    if (savedName)  document.getElementById('cName').value  = savedName;
-    if (savedEmail) document.getElementById('cEmail').value = savedEmail;
+    // ── Auto-fill from saved profile ─────────────────────────
+    (function autoFill() {
+        const nm   = localStorage.getItem('name')        || '';
+        const em   = localStorage.getItem('email')       || '';
+        const ph   = localStorage.getItem('userPhone')   || '';
+        const addr = localStorage.getItem('userAddress') || '';
+
+        if (nm)   document.getElementById('cName').value    = nm;
+        if (em)   document.getElementById('cEmail').value   = em;
+        if (ph)   document.getElementById('cPhone').value   = ph;
+        if (addr) document.getElementById('cAddress').value = addr;
+
+        // Show auto-fill notice if any data was found
+        if (nm || ph || addr) {
+            const tip = document.createElement('div');
+            tip.style.cssText = 'background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 16px;font-size:12px;color:#1d4ed8;margin-bottom:16px;display:flex;align-items:center;gap:8px;';
+            tip.innerHTML = '<span>&#128204;</span> Da tu dong dien thong tin tu ho so cua ban. <a href="/page/account.html" style="color:#1d4ed8;font-weight:700;text-decoration:underline">Chinh sua</a>';
+            const firstCard = document.querySelector('.section-card-body');
+            if (firstCard) firstCard.prepend(tip);
+        }
+    })();
 
     function loadOrder() {
         const items = document.getElementById('orderItems');
